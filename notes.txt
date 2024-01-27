@@ -1,0 +1,27 @@
+1.Basic setup 
+blog posts, users, core are main components 
+each will be imported  into app.py by blueprints
+
+so have to set up __init__.py in all components to imported to other components or app.py
+python needs this to understand that its a module that can be imporrted
+***__init__ can be empty, its just to let python know its a module to be imported. 
+LEARN MORE on THIS. 
+
+#core will have home and info view so view.py
+#blogs needs forms as well so forms.py file in blog component
+
+#core doesnt need any forms, its just a main page with some views
+
+#users need views and forms for adding/updating users. 
+
+#picture handler has to be added for user profile image handling
+
+#error_pages will have views to show 404 error_pages
+
+#templates --- all templates go there for this project
+
+#__init__ file under company blog will hold lot of organizational logic, 
+conneting bluprints, connecting login manager, components everything togher
+that will help us organize so when we run app.py we can just import app from company-blog and run it. 
+
+
