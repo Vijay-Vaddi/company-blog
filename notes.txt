@@ -24,4 +24,6 @@ LEARN MORE on THIS.
 conneting bluprints, connecting login manager, components everything togher
 that will help us organize so when we run app.py we can just import app from company-blog and run it. 
 
+2.Core views and templates
+register bluprints inside init file of company blog
 
