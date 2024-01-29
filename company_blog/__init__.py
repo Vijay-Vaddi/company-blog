@@ -1,7 +1,9 @@
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-import os
+from flask_login import LoginManager
+
 app = Flask(__name__)
 
 #######################################
@@ -18,9 +20,17 @@ app.app_context().push()
 Migrate(app,db)
 
 #######################################
-########## BLUPRINT REGISTRATION ######
+########## LOGIN CONFIG SETUP   #######
 #######################################
 
+login_manager = LoginManager()
+
+login_manager.init_app(app)
+login_manager.login_view = 'users.login'
+
+#######################################
+########## BLUPRINT REGISTRATION ######
+#######################################
 
 from company_blog.core.views import core
 from company_blog.error_pages.handlers import error_pages

@@ -27,3 +27,11 @@ that will help us organize so when we run app.py we can just import app from com
 2.Core views and templates
 register bluprints inside init file of company blog
 
+3. Models set up 
+# image is set string as it'll a link to the file, 
+    # nullable is false, cant get rid of prof pic, there'll be a default with link
+    # index true is more to do with sql than flask, essential make that column into indexed for use if need be. 
+    
+
+@login_manager.user_loader
+function allows to use the if user_authenticated stuff. 
