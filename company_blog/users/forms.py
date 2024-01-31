@@ -40,6 +40,7 @@ class UpdateUserForm(FlaskForm):
     profile_pic = FileField('Update profile picture', validators=[FileAllowed(['jpg', 'jgep', 'png', 'gif'])])    
     submit = SubmitField('Save changes')
 
+    # is data required while updating profile?
     # to ensure the updated username, email does not taken by other users
     def validate_username(self, field):
         if User.query.filter_by(username=field.data).first():

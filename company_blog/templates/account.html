@@ -1,6 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="mt-4 p-5 bg-primary text-white rounded">
+    <div align = 'center'>
+        <h1>Welcome to the page for {{current_user.username}}</h1>
+        <img src="{{url_for('static', filename='profile_pics'+current_user.profile_pic)}}">
+    </div>
+</div>
+
+<div class="container">
+    <form method="POST">
+        {{form.hidden_tag()}}
+        <div class="form-group">
+            {{form.username.label(class="form-group")}}
+            {{form.username(class="form-control")}}
+        </div>
+        
+        <div class="form-group">
+            {{form.email.label}}
+            {{form.email(class="form-control")}}
+        </div>
+        <div class="form-group">
+            {{form.profile_pic.label}}
+            {{form.profile_pic(class="form-control")}}
+        </div>
+        <div class="form-group">
+            {{form.submit()}}
+        </div>
+        
+    </form>
+
+
+</div>
+
+
+
 
 
 
