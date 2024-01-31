@@ -48,11 +48,6 @@ def login():
 
     return render_template('login.html', form=form)            
 
-        
-
-
-
-
 # logout
 @users.route('/logout')
 def logout():
@@ -61,4 +56,43 @@ def logout():
 # why use redirect and not render_temp
 
 # account
+
+@users.route('/account', methods=['GET', 'POST'])
+@login_required
+def account():
+    form = UpdateUserForm()
+
+    if form.validate_on_submit(): 
+        
+        if form.profile_pic.data:
+            username = current_user.username
+            pic = add_profile_pic(form.profile_pic.data, username)
+            current_user.profile_pic = pic
+
+        # if form.email.data:
+            # check if email unique
+        current_user.email = form.email.data
+        
+        # if form.username.data:
+        current_user.username = form.username.data
+        
+        db.session.commit()
+
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    # if they're not submitting anything we're grabbing their current info. 
+    # why we're doing this? 
+    
+    profile_pic = url_for('static', filename ='profile_pics/'+current_user.profile_pic)
+    # to pass a profile pic, grab the whatever value from the current users profile_pic value, either default or already updated. 
+    #what does url_for does here? 
+    return render_template('account.html', form=form, profile_pic=profile_pic) 
+
+            
+
+
+
+
+
 # users list of blog posts
