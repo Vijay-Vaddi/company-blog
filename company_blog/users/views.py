@@ -7,7 +7,7 @@ from company_blog import db
 
 users = Blueprint('users', __name__)
 
-# register
+# Register User
 @users.route('/register', methods=['GET', 'POST'])
 def register():
 
@@ -26,7 +26,7 @@ def register():
     
     return render_template('register.html', form=form)
 
-# login
+# Login User
 @users.route('/login', methods=["GET", "POST"])
 def login():
 
@@ -48,15 +48,14 @@ def login():
 
     return render_template('login.html', form=form)            
 
-# logout
+# Logout User
 @users.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('core.index'))
-# why use redirect and not render_temp
+    # why use redirect and not render_temp
 
-# account
-
+# Update Account
 @users.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
@@ -89,7 +88,15 @@ def account():
     #what does url_for does here? 
     return render_template('account.html', form=form, profile_pic=profile_pic) 
 
-            
+# User Posts
+@users.route("<username>")
+def user_posts(username):
+    page = request.args.get('page', 1, type=int)
+    # grab whatever page you're currently on, its connected to the page call showing certain no. of posts per page.  
+    user = User.query.filter_by(username=username).first_or_404()
+    blog_posts = BlogPost.query.filter_by(author=user).order_by(BlogPost.date.desc()).paginate(page=page, per_page=5)
+
+    return render_template('user_blog_post.html', user=user, blog_posts=blog_posts)                
 
 
 
