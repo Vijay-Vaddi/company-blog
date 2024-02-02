@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="mt-4 p-5 bg-primary text-white rounded">
+            <h1>Welcome to the page for  {{user.username}} </h1>
+            <img src="{{url_for('static', filename='profile_pic/'+user.profile_pic)}}">
+        </div>
+    
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+        {% for page_num in blog_posts.iter_pages(left_edge=1, right_egde=1, left_current=1, right_current=1) %}
+            {% if blog_posts.page == page_num %}
+            <li class="page-item disabled">
+                <a href="{{url_for('users.user_posts', page=page_num, username=user.username)}}" class="page-link">{{page_num}}</a>  
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a href="{{url_for('users.user_posts', page=page_num, username=user.user)}}" class="page-link">{{page_num}}</a>  
+            </li>
+            {%endif%}
+        {% endfor %}
+        </ul>
+    </nav>
+</div>
+
+{% endblock %}
