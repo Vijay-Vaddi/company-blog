@@ -7,6 +7,14 @@
             <img src="{{url_for('static', filename='profile_pic/'+user.profile_pic)}}">
         </div>
     
+    {% for post in blog_post.items() %}
+    <h2>
+        <a href="{{url_for('blog_posts.blog_post', blog_post_id=post.id)}}"> 
+                Written By: <a href="{{}}"></a>
+        </a>
+    </h2>
+
+
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
         {% for page_num in blog_posts.iter_pages(left_edge=1, right_egde=1, left_current=1, right_current=1) %}
