@@ -35,7 +35,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         
-        if user.check_password(form.password.data) and user is not None:
+        if  user is not None and user.check_password(form.password.data):
             login_user(user)
             flash('Login success')
             
@@ -45,6 +45,9 @@ def login():
                 next = url_for('core.index')
 
             return redirect(next)
+
+        elif AttributeError:
+            flash('No such user. Please try again')  
 
     return render_template('login.html', form=form)            
 

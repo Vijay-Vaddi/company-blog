@@ -16,6 +16,9 @@
         {% for error in form.password.errors %}
             {{error}}<br> 
         {% endfor %}
+    {% for message in get_flashed_messages() %}
+        {{message}}<br>
+    {% endfor %}        
     {{form.submit()}}
 
 

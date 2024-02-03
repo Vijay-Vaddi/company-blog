@@ -11,13 +11,14 @@ app.config['SECRET_KEY'] = 'hello123'
 #######################################
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+os.path.join(basedir, 'blog.sqlite')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+os.path.join(basedir,'blog.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy()
-db.init_app(app)
-app.app_context().push()
+db = SQLAlchemy(app)
+# db.init_app(app)
 Migrate(app,db)
+app.app_context().push()
+
 
 #######################################
 ########## LOGIN CONFIG SETUP   #######
