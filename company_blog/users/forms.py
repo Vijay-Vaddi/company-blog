@@ -3,6 +3,7 @@ from wtforms import StringField, TextAreaField, SubmitField, EmailField, Passwor
 from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms import ValidationError
 from flask_wtf.file import FileField, FileAllowed
+from flask_login import current_user
 # is going to allow user update/upload png/jpeg file  
 
 from company_blog.models import User
@@ -24,12 +25,15 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
 
     def validate_username(self, field):
-        if User.query.filter_by(username=field.data).first():
+        print(field.data,'----', current_user.username )
+        if field.data!=current_user.username and User.query.filter_by(username=field.data).first():
             raise ValidationError(f"Username taken!")
     
 
     def validate_email(self, field):
-        if User.query.filter_by(email=field.data).first():
+        print(field.data,'----', current_user.email )
+
+        if field.data!=current_user.email and User.query.filter_by(email=field.data).first():
             raise ValidationError("Email already registered!")
         
 
