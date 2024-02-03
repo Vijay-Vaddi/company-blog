@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True, index=True)
     email = db.Column(db.String(64), unique=True, index=True)
-    profile_pic = db.Column(db.String(64), nullable = False, default='default_prof_pic.png')
+    profile_pic = db.Column(db.String(64), nullable = False, default='default_prof_pic.jpg')
     password_hash = db.Column(db.String(128))
 
     posts = db.relationship('BlogPost', backref = 'author', lazy = False)

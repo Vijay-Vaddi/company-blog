@@ -4,7 +4,7 @@
 <div class="mt-4 p-5 bg-primary text-white rounded">
     <div align = 'center'>
         <h1>Welcome to the page for {{current_user.username}}</h1>
-        <img src="{{url_for('static', filename='profile_pics'+current_user.profile_pic)}}">
+        <img alt="default profile pic" src="{{url_for('static', filename='profile_pics/'+current_user.profile_pic)}}">
     </div>
 </div>
 
