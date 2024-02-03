@@ -9,7 +9,7 @@ def add_profile_pic(pic_upload, username):
     saved_name = str(username)+'.'+extension
     #to keep file names unique, its saved with unique username. can hash it if we want later
 
-    file_path = os.path.join(current_app, 'static/profile_pics/', saved_name)
+    file_path = os.path.join(current_app.root_path, 'static/profile_pics', saved_name)
     # where to save
 
     output_size = (100, 100)

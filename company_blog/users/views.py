@@ -66,6 +66,7 @@ def account():
 
     if form.validate_on_submit(): 
         print('inside validate')
+        print(form.profile_pic.data)
         if form.profile_pic.data:
             print(f'inside if prifile\.pic')
             username = current_user.username

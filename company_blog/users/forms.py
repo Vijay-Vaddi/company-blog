@@ -26,14 +26,14 @@ class RegistrationForm(FlaskForm):
 
     def validate_username(self, field):
         print(field.data,'----', current_user.username )
-        if field.data!=current_user.username and User.query.filter_by(username=field.data).first():
+        if User.query.filter_by(username=field.data).first():
             raise ValidationError(f"Username taken!")
     
 
     def validate_email(self, field):
         print(field.data,'----', current_user.email )
 
-        if field.data!=current_user.email and User.query.filter_by(email=field.data).first():
+        if User.query.filter_by(email=field.data).first():
             raise ValidationError("Email already registered!")
         
 
@@ -47,11 +47,11 @@ class UpdateUserForm(FlaskForm):
     # is data required while updating profile?
     # to ensure the updated username, email does not taken by other users
     def validate_username(self, field):
-        if User.query.filter_by(username=field.data).first():
+        if field.data!=current_user.username and User.query.filter_by(username=field.data).first():
             raise ValidationError(f"Username taken!")
     
 
     def validate_email(self, field):
-        if User.query.filter_by(email=field.data).first():
+        if field.data!=current_user.email and User.query.filter_by(email=field.data).first():
             raise ValidationError("Email already registered!")
     
