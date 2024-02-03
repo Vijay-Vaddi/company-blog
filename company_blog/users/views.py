@@ -89,7 +89,7 @@ def account():
     return render_template('account.html', form=form, profile_pic=profile_pic) 
 
 # User Posts
-@users.route("<username>")
+@users.route("/<username>")
 def user_posts(username):
     page = request.args.get('page', 1, type=int)
     # grab whatever page you're currently on, its connected to the page call showing certain no. of posts per page.  

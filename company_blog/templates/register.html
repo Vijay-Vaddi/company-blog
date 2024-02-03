@@ -1,13 +1,34 @@
-{% extend "base.html"%}
+{% extends "base.html"%}
 
 {% block content %}
 
-<form method="POST">
+<form method="POST" class="wt-50">
+    {{ form.csrf_token }}
     {{form.hidden_tag()}}
-    {{form.username.label}}{{form.username(class="form-control")}}<br>
-    {{form.email.label}}{{form.email(class="form-control")}}<br>
-    {{form.password.label}}{{form.password(class="form-control")}}<br>
-    {{form.confirm_password.label}}{{form.confirm_password(class="form-control")}}<br>
+    {{form.username.label}}
+    {{form.username(class="form-control")}}<br>
+        {% for error in form.confirm_password.errors %}
+            {{ error }}<br>
+        {% endfor %}
+    
+    {{form.email.label}}
+    {{form.email(class="form-control")}}<br>
+        {% for error in form.confirm_password.errors %}
+            {{ error }}<br>
+        {% endfor %}
+
+    {{form.password.label}}
+    {{form.password(class="form-control")}}<br>
+        {% for error in form.confirm_password.errors %}
+            {{ error }}<br>
+        {% endfor %}
+    
+    {{form.confirm_password.label}}
+    {{form.confirm_password(class="form-control")}}<br>
+        {% for error in form.confirm_password.errors %}
+            {{ error }}<br>
+        {% endfor %} 
+    
     {{form.submit()}}
 
 

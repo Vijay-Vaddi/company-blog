@@ -10,7 +10,7 @@ from flask_login import current_user
 
 class LoginForm(FlaskForm):
     
-    login_id = EmailField('Login ID:', validators=[Email(), DataRequired()])
+    email = StringField('Login ID:', validators=[Email(), DataRequired()])
     password = PasswordField('Password:', validators=[DataRequired()])
     submit = SubmitField('Login')
 
@@ -18,9 +18,9 @@ class LoginForm(FlaskForm):
 class RegistrationForm(FlaskForm):
 
     username = StringField('Username:', validators=[DataRequired()])
-    email = EmailField('Email:', validators=[Email(),DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    confirm_password = PasswordField('Confirm password', validators=[DataRequired(), EqualTo('password', message='Password does not match')])
+    email = StringField('Email:', validators=[Email(),DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired(), EqualTo('confirm_password', message="Password does not match")])
+    confirm_password = PasswordField('Confirm password', validators=[DataRequired()])
     submit = SubmitField('Register')
 
     def validate_username(self, field):

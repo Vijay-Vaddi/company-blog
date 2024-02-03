@@ -1,11 +1,21 @@
-{% extend "base.html"%}
+{% extends "base.html"%}
 
 {% block content %}
 
-<form method="POST">
+<form method="POST" class="wt-50">
+    {{ form.csrf_token }}
     {{form.hidden_tag()}}
-    {{form.email.label}}{{form.email(class="form-control")}}<br>
-    {{form.password.label}}{{form.password(class="form-control")}}<br>
+    {{form.email.label}}<br> 
+    {{form.email(class="form-control")}}
+        {% for error in form.email.errors %}
+            {{error}}<br> 
+        {% endfor %}
+       
+    {{form.password.label}}<br> 
+    {{form.password(class="form-control")}}<br>
+        {% for error in form.password.errors %}
+            {{error}}<br> 
+        {% endfor %}
     {{form.submit()}}
 
 
