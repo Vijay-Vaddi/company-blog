@@ -65,25 +65,20 @@ def account():
     form = UpdateUserForm()
 
     if form.validate_on_submit(): 
-        print('inside validate')
-        print(form.profile_pic.data)
+
         if form.profile_pic.data:
             print(f'inside if prifile\.pic')
             username = current_user.username
             pic = add_profile_pic(form.profile_pic.data, username)
             current_user.profile_pic = pic
 
-        # if form.email.data:
-            # check if email unique
         current_user.email = form.email.data
         
-        # if form.username.data:
         current_user.username = form.username.data
         
         db.session.commit()
 
     elif request.method == 'GET':
-        print('inside empty GET')
         form.username.data = current_user.username
         form.email.data = current_user.email
     # if they're not submitting anything we're grabbing their current info. 
