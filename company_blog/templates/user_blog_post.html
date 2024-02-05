@@ -3,17 +3,17 @@
 {% block content %}
     <div class="container">
         <div class="mt-4 p-5 bg-primary text-white rounded">
-            <h1>Welcome to the page for  {{user.username}} </h1>
+            <h2>Welcome to the page for  {{user.username}} </h2>
             <img src="{{url_for('static', filename='profile_pic/'+user.profile_pic)}}">
         </div>
     
     {% for post in blog_posts.items %}
     <h2>
-        <a href="{{url_for('blog_posts.view_blogs', blog_post_id=post.id)}}"> </a></h2>
+        <a href="{{url_for('blog_posts.view_blog', blog_post_id=post.id)}}"> </a></h2>
                 Written By: <a href="{{url_for('users.user_posts', username=post.author.username)}}">{{post.author.username}}</a>
         <p class="text-muted">Published on: {{post.date.strftime("%Y-%m-%d")}}</p>
         <br>
-        <p>{{post.text}}</p>
+        <p class="white-space:pre-line">{{post.text}}</p>
         <br>
        {%endfor%}
         

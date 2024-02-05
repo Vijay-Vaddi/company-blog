@@ -2,19 +2,19 @@
 
 {% block content %}
 <div class="container">
-    <h1>{{post.title}}</h1>
-    <h2>Author: {{post.author.username}} </h2>
+    <h2>{{post.title}}</h2>
+    <h3>Author: {{post.author.username}} </h3>
     <p>Publication Date: {{post.date.strftime('%M %d, %Y')}}</p>
-    <p> {{post.text}} </p>  
+    <p class="white-space:pre-line"> {{post.text}} </p>  
 
 </div>
 
 {% if post.author == current_user %}
 <div>
-    <a href="{{url_for('blog_post.update', blog_post_id=post.id)}}">Update Blog</a>
-    <button class="btn btn-danger" type="button" data-toggle = 'modal' data-target="#del_post_modal">Delete</button>
+    <a href="{{url_for('blog_posts.update', blog_post_id=post.id)}}">Update Blog</a>
+    <button class="btn btn-danger" type="button" data-bs-toggle = 'modal' data-bs-target="#del_post_modal">Delete</button>
 </div>
-
+{%endif%}
 <div class="modal" tabindex="-1" id="del_post_modal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -27,9 +27,9 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <form method="POST" action="{{url_for('blog_posts.delete_post', blog_post_id=post.id)}}"></form>
+            <form method="POST" action="{{url_for('blog_posts.delete_post', blog_post_id=post.id)}}">
                 <input class="btn btn-danger" type="submit" value="Delete">
-        
+            </form>
         </div>
       </div>
     </div>

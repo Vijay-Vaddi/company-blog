@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="mt-4 p-5 bg-primary text-white rounded">
+    <div class="mt-4 p-5 rounded" style="text-align:left;">
         <h2>Tech company blog</h2>
     </div>
 
-<div class="container">
+<div class="container wt-50">
     {% for post in blog_posts.items %}
-        <div class="card" tyle="width: 18rem;>
+        <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h2>
+                <h3>
                     <a class="card-title" href="{{url_for('blog_posts.view_blog', blog_post_id=post.id)}}">{{post.title}}</a>
-                </h2> 
+                </h3> 
                 <a href="{{url_for('users.user_posts', username=post.author.username)}}">Written By: {{post.author.username}}</a>
                 <p class="card-title" style="font-size: small;">Published on: {{post.date.strftime('%d %M %Y')}}</p>
                 <p class="card-text"> {{post.text[:150]}} </p>
-                <a class="btn btn-primary" href="{{'blog_posts.view_blog', blog_post_id=post.id}}">Read Blog</a>
+                <a class="btn btn-primary" href="{{url_for('blog_posts.view_blog', blog_post_id=post.id)}}">Read Blog</a>
             </div>
         </div>
     {% endfor %}
