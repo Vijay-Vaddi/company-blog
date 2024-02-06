@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container">
         <div >
-            <h2>Welcome to the page of {{user.username}} </h2>
+            <h3>Welcome to the page of {{user.username}} </h3>
             <img src="{{url_for('static', filename='profile_pics/'+user.profile_pic)}}">
         </div>
     </div>

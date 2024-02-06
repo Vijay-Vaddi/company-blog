@@ -11,17 +11,17 @@ from flask_login import current_user
 
 class LoginForm(FlaskForm):
     
-    email = StringField('Login ID:', validators=[Email(), DataRequired()])
+    email = StringField('Email Address:', validators=[Email(), DataRequired()])
     password = PasswordField('Password:', validators=[DataRequired()])
     submit = SubmitField('Login')
 
     
 class RegistrationForm(FlaskForm):
-
-    username = StringField('Username:', validators=[DataRequired()])
-    email = StringField('Email:', validators=[Email(),DataRequired()])
+    
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[Email(),DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
-    confirm_password = PasswordField('Confirm password', validators=[DataRequired() , EqualTo('confirm_password', message="Password does not match")])
+    confirm_password = PasswordField('Confirm password', validators=[DataRequired(), EqualTo('password', message="Passwords do not match")])
     submit = SubmitField('Register')
 
     def validate_username(self, field):
@@ -36,6 +36,8 @@ class RegistrationForm(FlaskForm):
 
 class UpdateUserForm(FlaskForm):
 
+    first_name = StringField('First Name', validators=[DataRequired()])
+    last_name = StringField('Last Name', validators=[DataRequired()])
     username = StringField('Username:', validators=[DataRequired()])
     email = EmailField('Email:', validators=[Email(),DataRequired()])
     profile_pic = FileField('Update profile picture', validators=[FileAllowed(['jpg', 'jgep', 'png', 'gif'])])    

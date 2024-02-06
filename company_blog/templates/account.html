@@ -13,6 +13,14 @@
         {{ form.csrf_token }}
         {{form.hidden_tag()}}
         <div class="form-group">
+            {{form.first_name.label(class="form-group")}}
+            {{form.first_name(class="form-control")}}
+        </div>
+        <div class="form-group">
+            {{form.last_name.label(class="form-group")}}
+            {{form.last_name(class="form-control")}}
+        </div>
+        <div class="form-group">
             {{form.username.label(class="form-group")}}
             {{form.username(class="form-control")}}
         </div>

@@ -19,7 +19,9 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(64), unique=True, index=True)
     profile_pic = db.Column(db.String(64), nullable = False, default='default_prof_pic.png')
     password_hash = db.Column(db.String(128))
-
+    first_name = db.Column(db.String(20))
+    last_name = db.Column(db.String(20))
+    
     posts = db.relationship('BlogPost', backref = 'author', lazy = False)
 
     def __init__(self, username, email, password) -> None:

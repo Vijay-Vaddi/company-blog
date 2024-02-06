@@ -14,11 +14,11 @@ def register():
     form = RegistrationForm()
 
     if form.validate_on_submit():
-        name = form.username.data
+        username = form.username.data
         email = form.email.data
         password = form.password.data
 
-        new_user = User(name,email,password)
+        new_user = User(username,email,password)
         db.session.add(new_user)
         db.session.commit()
         flash('Thanks for registering') 
@@ -48,7 +48,7 @@ def login():
 
                     return redirect(next)
                 else:
-                    raise ValueError('Invalid Password')  
+                    flash('Invalid Password')  
         except AttributeError as e:
             flash(f'No such user. Please try again')
 
@@ -73,7 +73,6 @@ def account():
     if form.validate_on_submit(): 
 
         if form.profile_pic.data:
-            print(f'inside if prifile\.pic')
             username = current_user.username
             pic = add_profile_pic(form.profile_pic.data, username)
             current_user.profile_pic = pic
@@ -81,12 +80,17 @@ def account():
         current_user.email = form.email.data
         
         current_user.username = form.username.data
+        current_user.first_name = form.first_name.data
+        current_user.last_name = form.last_name.data
         
         db.session.commit()
 
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
+        form.first_name.data = current_user.first_name
+        form.last_name.data = current_user.last_name
+        
     # if they're not submitting anything we're grabbing their current info. 
     # why we're doing this? 
     
