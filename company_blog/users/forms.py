@@ -20,19 +20,16 @@ class RegistrationForm(FlaskForm):
 
     username = StringField('Username:', validators=[DataRequired()])
     email = StringField('Email:', validators=[Email(),DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired(), EqualTo('confirm_password', message="Password does not match")])
-    confirm_password = PasswordField('Confirm password', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm password', validators=[DataRequired() , EqualTo('confirm_password', message="Password does not match")])
     submit = SubmitField('Register')
 
     def validate_username(self, field):
-        print(field.data,'----', current_user.username )
         if User.query.filter_by(username=field.data).first():
             raise ValidationError(f"Username taken!")
     
 
-    def validate_email(self, field):
-        print(field.data,'----', current_user.email )
-
+    def validate_email(self, field):       
         if User.query.filter_by(email=field.data).first():
             raise ValidationError("Email already registered!")
         

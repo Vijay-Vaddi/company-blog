@@ -33,22 +33,28 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        
-        if  user is not None and user.check_password(form.password.data):
-            login_user(user)
-            flash('Login success')
+        try:
+            user = User.query.filter_by(email=form.email.data).first()
             
-            next = request.args.get('next')
+            if  user is not None:
+                if user.check_password(form.password.data):
+                    login_user(user)
+                    flash('Login success')
+                    
+                    next = request.args.get('next')
 
-            if next == None or not next[0]=='/':
-                next = url_for('core.index')
+                    if next == None or not next[0]=='/':
+                        next = url_for('core.index')
 
-            return redirect(next)
+                    return redirect(next)
+                else:
+                    raise ValueError('Invalid Password')  
+        except AttributeError as e:
+            flash(f'No such user. Please try again')
 
-        elif AttributeError:
-            flash('No such user. Please try again')  
-
+        except ValueError as e:
+            flash(f"Invalid Passwor. Please try again.")
+    
     return render_template('login.html', form=form)            
 
 # Logout User
