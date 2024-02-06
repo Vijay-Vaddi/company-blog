@@ -6,20 +6,29 @@
             <h2>Welcome to the page of {{user.username}} </h2>
             <img src="{{url_for('static', filename='profile_pics/'+user.profile_pic)}}">
         </div>
+    </div>
     
+<div class="row row-cols-1 row-cols-md-3 g-4">
     {% for post in blog_posts.items %}
-    <div class="card">
-    <div class="card-body">
-        <h4 class="card-title">
-        <a class="card-link" href="{{url_for('blog_posts.view_blog', blog_post_id=post.id)}}">{{post.title}}</a></h4>
-                Written By: <a href="{{url_for('users.user_posts', username=post.author.username)}}">{{post.author.username}}</a>
-        <p class="text-muted">Published on: {{post.date.strftime("%Y-%m-%d")}}</p>
-        <br>
-        <p class="white-space:pre-line">{{post.text[:150]}}</p>
-        <br>
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+            <h4 class="card-title">
+            <a class="card-link" href="{{url_for('blog_posts.view_blog', blog_post_id=post.id)}}">{{post.title}}</a></h4>
+                    Written By: <a href="{{url_for('users.user_posts', username=post.author.username)}}">{{post.author.username}}</a>
+            <p class="text-muted">Published on: {{post.date.strftime("%Y-%m-%d")}}</p>
+            <br>
+            <p class="white-space:pre-line">{{post.text[:150]}}</p>
+            <br>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-primary" href="{{url_for('blog_posts.view_blog', blog_post_id=post.id)}}">Read Blog</a>  
+            </div>
+        </div>
     </div>
-    </div>
-       {%endfor%}
+    {%endfor%}
+</div>
+       
         
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">

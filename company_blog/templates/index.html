@@ -5,9 +5,10 @@
         <h2>Tech company blog</h2>
     </div>
 
-<div class="container wt-100">
+<div class="row row-cols-1 row-cols-md-3 g-4">
     {% for post in blog_posts.items %}
-        <div class="card" style="width: 30rem;">
+    <div class="col">    
+        <div class="card h-100">
             <div class="card-body">
                 <h3>
                     <a class="card-title" href="{{url_for('blog_posts.view_blog', blog_post_id=post.id)}}">{{post.title}}</a>
@@ -15,9 +16,12 @@
                 <a href="{{url_for('users.user_posts', username=post.author.username)}}">Written By: {{post.author.username}}</a>
                 <p class="card-title" style="font-size: small;">Published on: {{post.date.strftime('%d %M %Y')}}</p>
                 <p class="card-text"> {{post.text[:150]}} </p>
-                <a class="btn btn-primary" href="{{url_for('blog_posts.view_blog', blog_post_id=post.id)}}">Read Blog</a>
             </div>
+        <div class="card-footer">
+            <a class="btn btn-primary" href="{{url_for('blog_posts.view_blog', blog_post_id=post.id)}}">Read Blog</a>  
         </div>
+        </div>
+    </div>    
     {% endfor %}
  </div>
 
