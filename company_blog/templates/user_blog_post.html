@@ -2,19 +2,23 @@
 
 {% block content %}
     <div class="container">
-        <div class="mt-4 p-5 bg-primary text-white rounded">
-            <h2>Welcome to the page for  {{user.username}} </h2>
+        <div >
+            <h2>Welcome to the page of {{user.username}} </h2>
             <img src="{{url_for('static', filename='profile_pics/'+user.profile_pic)}}">
         </div>
     
     {% for post in blog_posts.items %}
-    <h2>
-        <a href="{{url_for('blog_posts.view_blog', blog_post_id=post.id)}}"> </a></h2>
+    <div class="card">
+    <div class="card-body">
+        <h4 class="card-title">
+        <a class="card-link" href="{{url_for('blog_posts.view_blog', blog_post_id=post.id)}}">{{post.title}}</a></h4>
                 Written By: <a href="{{url_for('users.user_posts', username=post.author.username)}}">{{post.author.username}}</a>
         <p class="text-muted">Published on: {{post.date.strftime("%Y-%m-%d")}}</p>
         <br>
-        <p class="white-space:pre-line">{{post.text}}</p>
+        <p class="white-space:pre-line">{{post.text[:150]}}</p>
         <br>
+    </div>
+    </div>
        {%endfor%}
         
     <nav aria-label="Page navigation example">
